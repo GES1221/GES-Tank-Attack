@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dggiukpkr7d2u"]
+
+[ext_resource type="Script" path="res://explosion.gd" id="1_k61vg"]
+[ext_resource type="Texture2D" uid="uid://bnd3ajn6ajc6l" path="res://PNG/Default size/explosionSmoke2.png" id="2_21abv"]
+[ext_resource type="Texture2D" uid="uid://q7clgww7kde8" path="res://PNG/Default size/explosionSmoke3.png" id="3_gpk1c"]
+[ext_resource type="Texture2D" uid="uid://cgasiimex5lfy" path="res://PNG/Default size/explosionSmoke4.png" id="4_bqj35"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1xcr5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_21abv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gpk1c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bqj35")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1_k61vg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1xcr5")
+autoplay = "default"
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

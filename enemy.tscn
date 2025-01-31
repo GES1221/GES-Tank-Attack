@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8445reyekbhs"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_e3hqi"]
+[ext_resource type="Texture2D" uid="uid://coh3fekpjj7h4" path="res://PNG/Default size/tank_green.png" id="2_q522b"]
+[ext_resource type="PackedScene" uid="uid://ro8r7chgfy68" path="res://e_barrel.tscn" id="3_6a5ci"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bisya"]
+size = Vector2(30, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6a2si"]
+radius = 266.423
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+position = Vector2(700, 329)
+script = ExtResource("1_e3hqi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("2_q522b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 0)
+shape = SubResource("RectangleShape2D_bisya")
+
+[node name="DetectRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRadius"]
+shape = SubResource("CircleShape2D_6a2si")
+
+[node name="EBarrel" parent="." instance=ExtResource("3_6a5ci")]
+
+[connection signal="body_entered" from="DetectRadius" to="." method="_on_DetectRadius_body_entered"]
+[connection signal="body_exited" from="DetectRadius" to="." method="_on_DetectRadius_body_exited"]

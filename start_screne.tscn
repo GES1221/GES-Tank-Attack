@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnm6bobhpc7od"]
+
+[ext_resource type="FontFile" uid="uid://bi3jt22nsq6vh" path="res://Strengthen.ttf" id="1_8wso3"]
+[ext_resource type="Script" path="res://start_screne.gd" id="1_3656d"]
+
+[node name="StartScreen" type="Node2D"]
+script = ExtResource("1_3656d")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -114.0
+offset_top = -106.0
+offset_right = 1281.0
+offset_bottom = 759.0
+color = Color(0.403922, 0.67451, 0.698039, 1)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 425.0
+offset_top = 354.0
+offset_right = 730.0
+offset_bottom = 465.0
+theme_override_fonts/font = ExtResource("1_8wso3")
+theme_override_font_sizes/font_size = 102
+text = "START"
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 254.0
+offset_top = 119.0
+offset_right = 888.0
+offset_bottom = 244.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_8wso3")
+theme_override_font_sizes/font_size = 120
+text = "TANK ATTACK"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://dg1gojj6omlc7"]
+
+[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_x2gvp"]
+[ext_resource type="PackedScene" uid="uid://dbonicwbe3u8s" path="res://misile.tscn" id="2_kk4ix"]
+[ext_resource type="Texture2D" uid="uid://b71mitqyv1pid" path="res://PNG/Default size/tank_huge.png" id="2_lp6jw"]
+[ext_resource type="Texture2D" uid="uid://bqcp340kog2hh" path="res://PNG/Default size/specialBarrel6.png" id="6_kfkgi"]
+[ext_resource type="Texture2D" uid="uid://cunrcdlbws0mg" path="res://PNG/Default size/explosion2.png" id="6_qfg3x"]
+[ext_resource type="Texture2D" uid="uid://utpdmik16k3i" path="res://PNG/Default size/explosion3.png" id="7_1lqjo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ahxfd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_qfg3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_1lqjo")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"load",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4yd0"]
+size = Vector2(50, 48)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_x2gvp")
+Missile = ExtResource("2_kk4ix")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CoolDown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
+[node name="TankHuge" type="Sprite2D" parent="."]
+rotation = -1.5708
+texture = ExtResource("2_lp6jw")
+
+[node name="Barrel" type="Sprite2D" parent="."]
+position = Vector2(15, 0)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6_kfkgi")
+
+[node name="Muzzle" type="Marker2D" parent="Barrel"]
+position = Vector2(13.3333, 0)
+
+[node name="fire" type="AnimatedSprite2D" parent="Barrel"]
+position = Vector2(13.3333, 0)
+rotation = 1.5708
+scale = Vector2(0.254426, 0.254426)
+sprite_frames = SubResource("SpriteFrames_ahxfd")
+animation = &"fire"
+autoplay = "fire"
+frame = 1
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 1.90735e-06)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_n4yd0")
+
+[connection signal="timeout" from="CoolDown" to="." method="_on_cool_down_timeout"]
+[connection signal="animation_finished" from="Barrel/fire" to="." method="_on_fire_animation_finished"]

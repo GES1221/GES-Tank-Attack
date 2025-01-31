@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://b043kedk3mk78"]
+
+[ext_resource type="Texture2D" uid="uid://coimhqnbqpp14" path="res://PNG/Default size/barrelRust_side.png" id="1_iib7i"]
+
+[node name="BigRock" type="StaticBody2D"]
+position = Vector2(236, 97)
+rotation = 0.598648
+scale = Vector2(4, 4)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_iib7i")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -2)
+polygon = PackedVector2Array(10, -12, 10, -11, 10, 16, -10, 16, -10, -12)

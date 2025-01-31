@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://y0r6oqxyrbwh"]
+
+[ext_resource type="Script" path="res://Emisile.gd" id="1_ul68f"]
+[ext_resource type="PackedScene" uid="uid://dggiukpkr7d2u" path="res://explosion.tscn" id="2_4rbtj"]
+[ext_resource type="Texture2D" uid="uid://d1rnydt5cge47" path="res://PNG/Default size/shotRed.png" id="3_gvwn2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rkmba"]
+radius = 8.0
+
+[node name="EMissile" type="Area2D"]
+script = ExtResource("1_ul68f")
+ExplosionObj = ExtResource("2_4rbtj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("3_gvwn2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(11, 0)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_rkmba")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
